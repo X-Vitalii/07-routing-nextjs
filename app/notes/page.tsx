@@ -1,4 +1,4 @@
-import NoteClient from './Notes.client';
+import NoteClient from './NotesPage.client';
 
 export default function App() {
   const PER_PAGE = 12;
