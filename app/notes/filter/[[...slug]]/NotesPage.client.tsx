@@ -5,29 +5,37 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { Toaster } from 'react-hot-toast';
 
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes, type NotesResponse } from '@/lib/api';
 
-import Modal from '../../components/Modal/Modal';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import Pagination from '../../components/Pagination/Pagination';
-import NoteList from '../../components/NoteList/NoteList';
-import NoteForm from '../../components/NoteForm/NoteForm';
+import Modal from '@/components/Modal/Modal';
+import SearchBox from '@/components/SearchBox/SearchBox';
+import Pagination from '@/components/Pagination/Pagination';
+import NoteList from '@/components/NoteList/NoteList';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 import css from './NotesPage.module.css';
 
 type NotesClientProps = {
   perPage: number;
+  tag?: string;
 };
 
-export default function NoteClient({ perPage }: NotesClientProps) {
+export default function NoteClient({ perPage, tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [debouncedValue] = useDebounce(query, 3000);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ['notes', debouncedValue, page],
-    queryFn: () => fetchNotes(debouncedValue, page, perPage),
+  const { data, isSuccess, isLoading, isError } = useQuery<NotesResponse>({
+    queryKey: ['notes', debouncedValue, page, tag],
+    queryFn: () =>
+      fetchNotes({
+        page,
+        perPage,
+        query: debouncedValue,
+        tag,
+      }),
+
     placeholderData: keepPreviousData,
   });
 
@@ -63,7 +71,11 @@ export default function NoteClient({ perPage }: NotesClientProps) {
             Create note +
           </button>
         </header>
-        {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
+
+        {isSuccess && data!.notes.length > 0 && (
+          <NoteList notes={data!.notes} />
+        )}
+
         {isModalOpen && (
           <Modal onClose={closeModal}>
             <NoteForm onClose={closeModal} />
