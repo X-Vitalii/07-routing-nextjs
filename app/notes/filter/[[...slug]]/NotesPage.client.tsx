@@ -1,17 +1,23 @@
 'use client';
 
 import { useState, type ChangeEvent } from 'react';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { Toaster } from 'react-hot-toast';
 
-import { fetchNotes, type NotesResponse } from '@/lib/api';
+import { fetchNotes, type NotesResponse } from '../../../../lib/api';
+// import type { Note } from '../../../../types/note';
 
-import Modal from '@/components/Modal/Modal';
-import SearchBox from '@/components/SearchBox/SearchBox';
-import Pagination from '@/components/Pagination/Pagination';
-import NoteList from '@/components/NoteList/NoteList';
-import NoteForm from '@/components/NoteForm/NoteForm';
+import Modal from '../../../../components/Modal/Modal';
+import SearchBox from '../../../../components/SearchBox/SearchBox';
+import Pagination from '../../../../components/Pagination/Pagination';
+import NoteList from '../../../../components/NoteList/NoteList';
+import NoteForm from '../../../../components/NoteForm/NoteForm';
 
 import css from './NotesPage.module.css';
 
@@ -20,7 +26,18 @@ type NotesClientProps = {
   tag?: string;
 };
 
-export default function NoteClient({ perPage, tag }: NotesClientProps) {
+export default function NotesPage({ perPage, tag }: NotesClientProps) {
+  const [queryClient] = useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Toaster position="top-right" />
+      <NotesContent perPage={perPage} tag={tag} />
+    </QueryClientProvider>
+  );
+}
+
+function NotesContent({ perPage, tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [debouncedValue] = useDebounce(query, 3000);
@@ -35,7 +52,6 @@ export default function NoteClient({ perPage, tag }: NotesClientProps) {
         query: debouncedValue,
         tag,
       }),
-
     placeholderData: keepPreviousData,
   });
 
@@ -51,7 +67,6 @@ export default function NoteClient({ perPage, tag }: NotesClientProps) {
 
   return (
     <>
-      <Toaster position="top-right" />
       <div className={css.app}>
         <header className={css.toolbar}>
           <SearchBox value={query} onChangeQuery={onChangeQuery} />

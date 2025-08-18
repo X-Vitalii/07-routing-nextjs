@@ -2,10 +2,10 @@ export const runtime = 'nodejs';
 
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import './globals.css';
+
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
-import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,19 +24,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <TanStackProvider>
-          <Header />
-
-          <main>{children}</main>
-
-          <Footer />
-        </TanStackProvider>
+        <Header />
+        <main>{children}</main>
+        <Footer />
         <div id="modal-root" />
       </body>
     </html>
