@@ -2,7 +2,6 @@
 
 import { useState, type ChangeEvent } from 'react';
 import {
-  keepPreviousData,
   useQuery,
 } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
@@ -48,7 +47,7 @@ function NotesContent({ perPage, tag }: NotesClientProps) {
         query: debouncedValue,
         tag,
       }),
-    placeholderData: keepPreviousData,
+    placeholderData: (previousData) => previousData,
   });
 
   const totalPages = data?.totalPages ?? 0;
