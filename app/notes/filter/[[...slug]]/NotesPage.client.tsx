@@ -4,8 +4,6 @@ import { useState, type ChangeEvent } from 'react';
 import {
   keepPreviousData,
   useQuery,
-  QueryClient,
-  QueryClientProvider,
 } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { Toaster } from 'react-hot-toast';
@@ -27,13 +25,11 @@ type NotesClientProps = {
 };
 
 export default function NotesPage({ perPage, tag }: NotesClientProps) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Toaster position="top-right" />
       <NotesContent perPage={perPage} tag={tag} />
-    </QueryClientProvider>
+    </>
   );
 }
 
