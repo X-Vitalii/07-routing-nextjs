@@ -1,0 +1,22 @@
+.notesFilterLayout {
+  display: flex;
+  min-height: calc(100vh - 120px); /* Account for header and footer */
+  background-color: #ffffff;
+}
+
+.notesContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .notesFilterLayout {
+    flex-direction: column;
+  }
+  
+  .notesContent {
+    padding: 1rem;
+  }
+}

@@ -9,22 +9,23 @@ api.interceptors.request.use((config) => {
   const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
   if (token) {
     config.headers = config.headers ?? {};
-    config.headers.Authorization = `Bearer ${token}`;
+    (config.headers as Record<string, string>).Authorization =
+      `Bearer ${token}`;
   }
   return config;
 });
 
-export interface NotesResponse {
+export type NotesResponse = {
   notes: Note[];
   totalPages: number;
-}
+};
 
-export interface FetchNotesParams {
+export type FetchNotesParams = {
   page: number;
   perPage: number;
   query?: string;
-  tag?: Tag | string;
-}
+  tag?: Tag;
+};
 
 export async function fetchNotes(
   params: FetchNotesParams,

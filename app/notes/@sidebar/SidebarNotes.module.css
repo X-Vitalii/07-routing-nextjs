@@ -1,0 +1,55 @@
+.sidebar {
+  width: 150px;
+  background-color: #333;
+  padding: 1.5rem;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #555;
+}
+
+.navigation {
+  width: 100%;
+}
+
+.menuList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  margin-bottom: 16px;
+}
+
+.menuLink {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  display: block;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.menuLink:hover {
+  background-color: #444;
+  color: #ddd;
+}
+
+.menuLink.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.menuLink.active:hover {
+  background-color: #0056b3;
+}
