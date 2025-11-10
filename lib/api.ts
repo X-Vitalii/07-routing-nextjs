@@ -12,13 +12,18 @@ interface NotesResponse {
   notes: Note[];
   totalPages: number;
 }
-
-export async function fetchNotes(
-  query: string,
-  page: number,
-): Promise<NotesResponse> {
+interface FetchNotesParams {
+  query?: string;
+  page: number;
+  tag?: Tag;
+}
+export async function fetchNotes({
+  query,
+  page,
+  tag,
+}: FetchNotesParams): Promise<NotesResponse> {
   const { data } = await axios.get<NotesResponse>('/notes', {
-    params: { page, perPage: 12, search: query },
+    params: { page, perPage: 12, search: query, tag },
   });
   return data;
 }
@@ -37,3 +42,16 @@ export async function deleteNote(deleteId: string): Promise<Note> {
   const { data } = await axios.delete<Note>(`/notes/${deleteId}`);
   return data;
 }
+
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const getCategories = async () => {
+  const res = await axios<Category[]>('/categories');
+  return res.data;
+};

@@ -7,23 +7,27 @@ import { Toaster } from 'react-hot-toast';
 
 import { fetchNotes } from '@/lib/api';
 
-import Modal from '../../components/Modal/Modal';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import Pagination from '../../components/Pagination/Pagination';
-import NoteList from '../../components/NoteList/NoteList';
-import NoteForm from '../../components/NoteForm/NoteForm';
-
 import css from './NotesPage.module.css';
+import SearchBox from '@/components/SearchBox/SearchBox';
+import Pagination from '@/components/Pagination/Pagination';
+import NoteList from '@/components/NoteList/NoteList';
+import Modal from '@/components/ModalCreate/ModalCreate';
+import NoteForm from '@/components/NoteForm/NoteForm';
+import { Tag } from '@/types/note';
 
-export default function NoteClient() {
+interface Props {
+  tag?: Tag;
+}
+
+export default function NoteClient({ tag }: Props) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [debouncedValue] = useDebounce(query, 3000);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ['notes', debouncedValue, page],
-    queryFn: () => fetchNotes(debouncedValue, page),
+    queryKey: ['notes', debouncedValue, page, tag],
+    queryFn: () => fetchNotes({ query: debouncedValue, page, tag }),
     placeholderData: keepPreviousData,
   });
 

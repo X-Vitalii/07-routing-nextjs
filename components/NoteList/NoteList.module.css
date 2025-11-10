@@ -42,8 +42,8 @@
   align-self: flex-end;
   padding: 6px 12px;
   font-size: 14px;
-  color: #2770f99c;
-  background-color: #eb7a8577;
+  color: #fff;
+  background-color: #dc3545;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -52,24 +52,6 @@
 
 .button:hover {
   background-color: #bb2d3b;
-  color: #ffffff;
-}
-
-.viewButton {
-  align-self: flex-end;
-  padding: 6px 12px;
-  font-size: 14px;
-  color: #2770f99c;
-  background-color: #d3cdce;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.viewButton:hover {
-  background-color: #d3cdce;
-  color: #ffffff;
 }
 
 .footer {

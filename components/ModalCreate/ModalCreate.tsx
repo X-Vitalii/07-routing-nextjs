@@ -4,14 +4,14 @@ import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import css from './Modal.module.css';
 
-interface ModalProps {
+interface ModalCreateProps {
   onClose: () => void;
   children: React.ReactNode;
 }
 
 // const modalRoot = document.getElementById('modal-root')!;
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function ModalCreate({ onClose, children }: ModalCreateProps) {
   const modalRoot = document.getElementById('modal-root')!;
   useEffect(() => {
     document.body.style.overflow = 'hidden';
