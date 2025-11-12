@@ -9,7 +9,7 @@ const NotesLayout = ({ children, sidebar }: Props) => {
   return (
     <section className={css.beside}>
       <aside>{sidebar}</aside>
-      <div>{children}</div>
+      {children}
     </section>
   );
 };
