@@ -7,7 +7,7 @@ type ModalDetailsProps = {
   children: React.ReactNode;
 };
 
-const ModalDetails = ({ children }: ModalDetailsProps) => {
+const Modal = ({ children }: ModalDetailsProps) => {
   const router = useRouter();
 
   const close = () => router.back();
@@ -22,4 +22,4 @@ const ModalDetails = ({ children }: ModalDetailsProps) => {
   );
 };
 
-export default ModalDetails;
+export default Modal;

@@ -42,16 +42,3 @@ export async function deleteNote(deleteId: string): Promise<Note> {
   const { data } = await axios.delete<Note>(`/notes/${deleteId}`);
   return data;
 }
-
-export type Category = {
-  id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export const getCategories = async () => {
-  const res = await axios<Category[]>('/categories');
-  return res.data;
-};
