@@ -9,8 +9,6 @@ interface ModalCreateProps {
   children: React.ReactNode;
 }
 
-// const modalRoot = document.getElementById('modal-root')!;
-
 export default function ModalCreate({ onClose, children }: ModalCreateProps) {
   const modalRoot = document.getElementById('modal-root')!;
   useEffect(() => {

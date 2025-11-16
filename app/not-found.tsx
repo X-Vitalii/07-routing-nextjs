@@ -4,7 +4,6 @@ import css from './page.module.css';
 export const metadata: Metadata = {
   title: 'Note HUB - home',
   description: 'Everything InTime - Fast and Simple App to manage tasks',
-  url: `https://notehub.com/notes/`,
   openGraph: {
     title: `Page not found`,
     description: 'Page you are looking for does not exist',

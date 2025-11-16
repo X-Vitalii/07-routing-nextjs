@@ -3,11 +3,9 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-// import css from './SidebarNotes.module.css';
 import { fetchNotes } from '@/lib/api';
 import { Tag } from '@/types/note';
 import NoteClient from './Notes.client';
-// import {fetchNotes} from '
 
 type Props = {
   params: Promise<{ slug: string[] }>;
