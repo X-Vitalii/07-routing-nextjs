@@ -18,6 +18,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Note HUB - home',
   description: 'Everything InTime - Fast and Simple App to manage tasks',
+  openGraph: {
+    title: `Note HUB - home`,
+    description: 'Everything InTime - Fast and Simple App to manage tasks',
+    url: `https://notehub.com/notes/`,
+    images: {
+      url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+      width: 1200,
+      height: 630,
+      alt: `Note HUB - home`,
+    },
+  },
 };
 
 export default function RootLayout({
